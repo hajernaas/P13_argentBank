@@ -1,0 +1,49 @@
+.error {
+
+    text-align: center;
+    padding: 40px;
+
+    &__title {
+        font-size: 4rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #b94242;
+
+        @media (min-width: 400px) {
+
+            font-size: 6rem;
+        }
+    }
+
+    &__text {
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-bottom: 50px;
+
+    }
+
+    a {
+        display: inline-block;
+        color: white;
+        background-color: black;
+        padding: 8px 16px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background-color: #42b983;
+
+        }
+
+        @media (min-width: 400px) {
+            padding: 10px 20px;
+            font-size: 1.3rem;
+        }
+    }
+
+
+
+
+}
