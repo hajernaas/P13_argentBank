@@ -19,7 +19,7 @@ export const authSlice = createSlice({
 			state.token = action.payload.token; //Mettre à jour le token avec celui fourni dans l'action
 			state.user = action.payload.user; // Mettre à jour les informations de l'utilisateur avec celles fournies dans l'action
 		},
-		logOut: (state) => {
+		logout: (state) => {
 			// Appelé lorsqu'un utilisateur se déconnecte
 			state.isConnected = false;
 			state.token = null;
