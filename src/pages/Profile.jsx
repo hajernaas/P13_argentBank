@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+import UserInfo from "../components/user/UserInfo";
 
 const Profile = () => {
-	return <div>profil utilisateur</div>;
+	return (
+		<>
+			<UserInfo />
+		</>
+	);
 };
 
 export default Profile;

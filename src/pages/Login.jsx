@@ -1,9 +1,10 @@
 import React from "react";
+import Connection from "../components/login/Connection";
 
 const Login = () => {
 	return (
 		<div>
-			<h1>connexion</h1>
+			<Connection />
 		</div>
 	);
 };
