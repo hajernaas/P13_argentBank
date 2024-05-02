@@ -50,15 +50,16 @@ export const updateUserThunk = createAsyncThunk(
 );
 
 const initialState = {
-	//Définir l'état initial. Cet état inclut le statut d'authentification de l'utilisateur,
+	//Définir l'état initial de la tranche d'authentification dans le Redux store.  Cet état inclut le statut d'authentification de l'utilisateur,
 	//le statut pour suivre l'état de la requête, la gestion des erreurs,le jeton et les informations de l'utilisateur
 	isConnected: false,
-	token: null,
+	token: localStorage.getItem("token") || sessionStorage.getItem("token") || null,
 	email: null,
 	firstName: null,
 	lastName: null,
 	status: null,
 	error: null,
+	rememberMe: localStorage.getItem("rememberMe") === "true",
 };
 console.log("initialState", initialState);
 
@@ -76,6 +77,20 @@ export const authSlice = createSlice({
 			state.email = null;
 			state.firstName = null;
 			state.lastName = null;
+			localStorage.removeItem("token");
+			sessionStorage.removeItem("token");
+		},
+
+		setToken: (state, action) => {
+			state.token = action.payload;
+		},
+		clearToken: (state) => {
+			state.token = null;
+		},
+
+		toggleRememberMe(state) {
+			state.rememberMe = !state.rememberMe;
+			localStorage.setItem("rememberMe", state.rememberMe);
 		},
 	},
 
@@ -85,7 +100,12 @@ export const authSlice = createSlice({
 			state.token = action.payload.body.token;
 			state.isConnected = true;
 			state.status = "succeeded";
-			localStorage.setItem("token", action.payload.body.token);
+			//localStorage.setItem("token", action.payload.body.token);
+			if (state.rememberMe) {
+				localStorage.setItem("token", action.payload.body.token);
+			} else {
+				sessionStorage.setItem("token", action.payload.body.token);
+			}
 		});
 		builder.addCase(loginThunk.rejected, (state, action) => {
 			state.status = "failed";
@@ -116,7 +136,7 @@ export const authSlice = createSlice({
 });
 
 //Exporter des actions créés par createSlice qui peuvent être utilisées dans les composants afin d'envoyer des informations .
-export const { logout } = authSlice.actions;
+export const { logout, setToken, clearToken, toggleRememberMe } = authSlice.actions;
 console.log("authSlice.actions", authSlice.actions);
 
 // Exporter authSlice  qui sera utilisé par le store
@@ -125,3 +145,4 @@ export default authSlice.reducer;
 // Sélecteurs
 export const IsAuth = (state) => state.auth.isConnected;
 export const getToken = (state) => state.auth.token;
+export const isRememberMe = (state) => state.auth.rememberMe;

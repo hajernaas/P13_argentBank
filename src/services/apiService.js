@@ -18,6 +18,9 @@ export const loginUser = async (email, password) => {
 				},
 			}
 		);
+		const { token } = response.data.body;
+		console.log("loginUser", response.data);
+		console.log("token", token);
 
 		return response.data;
 	} catch (error) {

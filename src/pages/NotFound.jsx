@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NotFound = () => {
+function NotFound() {
 	return (
 		<div>
 			<section className="error">
@@ -13,6 +13,6 @@ const NotFound = () => {
 			</section>
 		</div>
 	);
-};
+}
 
 export default NotFound;

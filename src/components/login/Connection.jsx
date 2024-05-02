@@ -4,39 +4,57 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { loginThunk, IsAuth, getToken } from "../../app/authSlice.js";
+import {
+	loginThunk,
+	IsAuth,
+	getToken,
+	toggleRememberMe,
+	isRememberMe,
+} from "../../slices/authSlice.js";
 import { useNavigate } from "react-router-dom";
 
 const Connection = () => {
 	//Initialise deux états locaux (email et password) à l'aide du hook useState.
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	//const [rememberMe, setRememberMe] = useState(false);
+
 	// useDispatch est utilisé pour envoyer des actions Redux.
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	//useSelector est utilisé pour extraire des données du store Redux.
 	const isConnected = useSelector(IsAuth);
 	const authToken = useSelector(getToken);
+	const rememberMe = useSelector(isRememberMe);
 	console.log("authToken", authToken);
-	console.log("isAuth", isConnected);
+	console.log("isAuthLogin", isConnected);
+	console.log("rememberMe", rememberMe);
 
 	// useEffect est utilisé pour exécuter une action lorsque l'état de connexion (isConnected) change
 	useEffect(() => {
-		if (isConnected) {
+		if (authToken) {
 			navigate("/profile");
 		}
-	}, [isConnected, navigate]);
+	}, [authToken, navigate]);
 
 	// la fonction handleSubmit qui est exécutée lorsque le formulaire est soumis.
 	//elle envoie une action Redux pour la connexion de l'utilisateur à l'aide de dispatch(loginThunk).
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		try {
-			dispatch(loginThunk({ email, password }));
+			const response = dispatch(loginThunk({ email, password }));
+			console.log("response", response);
+			//navigate("/profile");
 		} catch (error) {
 			console.log("Error submitting login form :", error);
 		}
 	};
+
+	const handleToggleRememberMe = () => {
+		const c = dispatch(toggleRememberMe());
+		console.log("ccc remb", c);
+	};
+
 	//Rendu JSX du composant, contenant le formulaire de connexion.
 	return (
 		<main className="main bg-dark">
@@ -67,7 +85,13 @@ const Connection = () => {
 						/>
 					</div>
 					<div className="input-remember">
-						<input type="checkbox" id="remember-me" />
+						<input
+							type="checkbox"
+							id="remember-me"
+							checked={rememberMe}
+							onChange={handleToggleRememberMe}
+						/>
+
 						<label htmlFor="remember-me">Remember me</label>
 					</div>
 					<button type="submit" className="sign-in-button">
