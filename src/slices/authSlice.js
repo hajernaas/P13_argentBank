@@ -42,6 +42,7 @@ export const updateUserThunk = createAsyncThunk(
 	async ({ token, firstName, lastName }, { rejectWithValue }) => {
 		try {
 			const data = await updateUserProfile(token, firstName, lastName);
+			console.log("dataUpdate", data);
 			return data;
 		} catch (error) {
 			return rejectWithValue(error.message);
@@ -146,3 +147,5 @@ export default authSlice.reducer;
 export const IsAuth = (state) => state.auth.isConnected;
 export const getToken = (state) => state.auth.token;
 export const isRememberMe = (state) => state.auth.rememberMe;
+export const getFirstName = (state) => state.auth.firstName;
+export const getLastName = (state) => state.auth.lastName;

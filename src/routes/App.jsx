@@ -17,20 +17,22 @@ const App = () => {
 	console.log("tokenRoutes", token);
 
 	return (
-		<Router>
-			<Routes>
-				<Route path="/" element={<Layout />}>
-					<Route index element={<Home />} />
-					<Route path="/login" element={token ? <Navigate to={"/profile"} /> : <Login />} />
-					{token && (
-						<>
-							<Route path="/profile" element={<Profile />} />
-						</>
-					)}
-				</Route>
-				<Route path="*" element={<NotFound />} />
-			</Routes>
-		</Router>
+		<div className="App">
+			<Router>
+				<Routes>
+					<Route path="/" element={<Layout />}>
+						<Route index element={<Home />} />
+						<Route path="/login" element={token ? <Navigate to={"/profile"} /> : <Login />} />
+						{token && (
+							<>
+								<Route path="/profile" element={<Profile />} />
+							</>
+						)}
+					</Route>
+					<Route path="*" element={<NotFound />} />
+				</Routes>
+			</Router>
+		</div>
 	);
 };
 
