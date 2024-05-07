@@ -10,6 +10,13 @@ import {
 	getToken,
 	toggleRememberMe,
 	isRememberMe,
+	//getUserError,
+	//getpasswordError,
+	clearErrors,
+	//getStatus,
+	errorUser,
+	//getSuccessMessage,
+	//clearSuccessMessage,
 } from "../../slices/authSlice.js";
 import { useNavigate } from "react-router-dom";
 
@@ -17,8 +24,9 @@ const Connection = () => {
 	//Initialise deux états locaux (email et password) à l'aide du hook useState.
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	//const [rememberMe, setRememberMe] = useState(false);
 
+	//const [errorMessage, setErrorMessage] = useState("");
+	//const [successMessage, setSuccessMessage] = useState("");
 	// useDispatch est utilisé pour envoyer des actions Redux.
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -26,10 +34,15 @@ const Connection = () => {
 	const isConnected = useSelector(IsAuth);
 	const authToken = useSelector(getToken);
 	const rememberMe = useSelector(isRememberMe);
+	const error = useSelector(errorUser);
+	//const status = useSelector(getStatus);
+	//const successMessage = useSelector(getSuccessMessage);
 	console.log("authToken", authToken);
 	console.log("isAuthLogin", isConnected);
-	console.log("rememberMe", rememberMe);
 
+	console.log("errorlogin", error);
+
+	//const passwordError = useSelector(getpasswordError);
 	// useEffect est utilisé pour exécuter une action lorsque l'état de connexion (isConnected) change
 	useEffect(() => {
 		if (authToken) {
@@ -41,18 +54,43 @@ const Connection = () => {
 	//elle envoie une action Redux pour la connexion de l'utilisateur à l'aide de dispatch(loginThunk).
 	const handleSubmit = async (event) => {
 		event.preventDefault();
+
 		try {
 			const response = dispatch(loginThunk({ email, password }));
-			console.log("response", response);
+			console.log("responseConnexion", response);
+
+			//setSuccessMessage("User successfully logged in");
+			//dispatch(clearErrors());
+			//dispatch(setError(""));
 			//navigate("/profile");
 		} catch (error) {
-			console.log("Error submitting login form :", error);
+			/*const message = error.response.data.message;
+			console.log("message", message);
+			dispatch(handleMessage(message));*/
+			//console.log("Error submitting login form :", error);
+			console.error("Login failed:", error);
+			//setErrorMessage(error.message);
+			//setError(error.message);
 		}
 	};
 
 	const handleToggleRememberMe = () => {
 		const c = dispatch(toggleRememberMe());
 		console.log("ccc remb", c);
+	};
+
+	const handleUsernameChange = (e) => {
+		setEmail(e.target.value);
+		if (error) {
+			dispatch(clearErrors());
+		}
+	};
+
+	const handlePasswordChange = (e) => {
+		setPassword(e.target.value);
+		if (error) {
+			dispatch(clearErrors());
+		}
 	};
 
 	//Rendu JSX du composant, contenant le formulaire de connexion.
@@ -63,16 +101,21 @@ const Connection = () => {
 					icon={faUserCircle}
 					className="fa fa-user-circle sign-in-icon"></FontAwesomeIcon>
 				<h1>Sign In</h1>
+
 				<form onSubmit={handleSubmit}>
+					{error && <div className="error-message">{error}</div>}
+
 					<div className="input-wrapper">
 						<label htmlFor="username">Username</label>
 						<input
-							type="text"
+							type="email"
 							id="username"
 							value={email}
 							// mettre à jour la variable email à l'aide de la fonction setEmail
 							//chaque fois que le contenu de l'élément <input> change
-							onChange={(e) => setEmail(e.target.value)}
+							//onChange={(e) => setEmail(e.target.value)}
+							onChange={handleUsernameChange}
+							required
 						/>
 					</div>
 					<div className="input-wrapper">
@@ -81,7 +124,9 @@ const Connection = () => {
 							type="password"
 							id="password"
 							value={password}
-							onChange={(e) => setPassword(e.target.value)}
+							//onChange={(e) => setPassword(e.target.value)}
+							onChange={handlePasswordChange}
+							required
 						/>
 					</div>
 					<div className="input-remember">

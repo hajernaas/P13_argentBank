@@ -295,6 +295,7 @@ body {
 	margin: 0.5rem;
 	border-radius: 5px;
 }
+
 .transaction-button {
 	display: block;
 	width: 100%;
@@ -305,6 +306,121 @@ body {
 	border-color: #00bc77;
 	background-color: #00bc77;
 	color: #fff;
+}
+
+.transaction-button:hover {
+	border-color: #00a769;
+	background-color: #00b472;
+	cursor: pointer;
+}
+
+.transactions-box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+
+.transactions-box p {
+	width: 22%;
+	text-align: center;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.transactions-box .legend {
+	display: flex;
+	width: 80%;
+	justify-content: space-around;
+	color: white;
+	font-weight: 600;
+	padding-left: 5%;
+}
+
+.transaction {
+	display: flex;
+	width: 80%;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 15px;
+	background-color: #ffffff;
+	border-radius: 5px;
+	padding-left: 5%;
+}
+.transaction i:hover {
+	cursor: pointer;
+}
+.transaction.open .transaction-header {
+	border-radius: 5px 5px 0 0;
+}
+
+.transaction.open .angledown-icon {
+	transform: rotate(180deg);
+}
+.transaction-header {
+	display: flex;
+	position: relative;
+	width: 100%;
+	justify-content: space-around;
+	font-weight: 600;
+}
+.transaction-header .angledown-icon {
+	position: absolute;
+	left: -25px;
+	top: 10px;
+	font-size: 28px;
+	font-weight: 900;
+	transition: transform 0.5s ease-in-out;
+}
+.transaction-infos {
+	display: flex;
+	flex-direction: column;
+	align-items: normal;
+	width: 100%;
+	font-weight: 600;
+}
+.transaction-infos p {
+	margin: 10px 0 10px 9%;
+	text-align: start;
+	width: 100%;
+}
+
+.pen-icon {
+	padding-left: 0.3rem;
+}
+
+.transaction-page-header {
+	background-color: white;
+	margin: 8px 1%;
+	border-radius: 0 0 10px 10px;
+	padding: 20px 0 20px 0;
+	margin-bottom: 50px;
+}
+.transaction-page-header h1,
+.transaction-page-header h2,
+.transaction-page-header p {
+	margin: 5px;
+}
+.transaction-page-header h2 {
+	font-weight: 500;
+	font-size: 20px;
+}
+
+.error-message {
+	color: #ff0000;
+}
+
+@media (max-width: 720px) {
+	.transaction {
+		width: 90%;
+		padding-left: 8%;
+	}
+
+	.transaction-page-header {
+		/* margin: 0 15% 30px 15%; */
+		margin: 1px 3% 30px 3%;
+	}
 }
 
 @media (min-width: 720px) {

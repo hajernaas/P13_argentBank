@@ -1,8 +1,13 @@
 import axios from "axios";
+//import { useDispatch } from "react-redux";
+//import { setPasswordError, setUserError } from "../slices/authSlice";
+import { setError } from "../slices/authSlice";
+
 const API_URL = "http://localhost:3001/api/v1";
 
 //Call API pour authentifer l'utilisateur
 export const loginUser = async (email, password) => {
+	//const dispatch = useDispatch();
 	try {
 		const response = await axios.post(
 			`${API_URL}/user/login`,
@@ -21,10 +26,35 @@ export const loginUser = async (email, password) => {
 		const { token } = response.data.body;
 		console.log("loginUser", response.data);
 		console.log("token", token);
-
+		console.log("Login successful!", response.data);
 		return response.data;
 	} catch (error) {
-		throw new Error(`Login failed: unknown error occurred ${error.message}`);
+		//throw error;
+		console.log("err", error.message);
+		/*if (error.response) {
+			setError(error.response.data.message);
+		} else {
+			setError("Une erreur s'est produite. Veuillez réessayer.");
+		}*/
+
+		/*if (error.response && error.response.status === 404) {
+			throw new Error(`Login failed: user not found. Status code: ${error.response.status}`);
+		} else {
+			throw new Error("Login failed: unknown error occurred.");
+		}*/
+		//throw new Error(`Login failed: unknown error occurred ${error.message}`);
+
+		if (error.response && error.response.status === 400) {
+			const errorMessage = error.response.data.message;
+			console.log("errorMessage", errorMessage);
+			if (errorMessage.includes("User not found")) {
+				throw new Error("Incorrect user name.");
+			} else if (errorMessage.includes("Password is invalid")) {
+				throw new Error("Incorrect password");
+			}
+		} else {
+			throw new Error(`Login failed: unknown error occurred ${error.message}`);
+		}
 	}
 };
 

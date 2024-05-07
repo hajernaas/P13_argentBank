@@ -7,6 +7,7 @@ import NotFound from "../pages/NotFound.jsx";
 import Layout from "./Layout.jsx";
 import { useSelector } from "react-redux";
 import { IsAuth, getToken } from "../slices/authSlice.js";
+import Transactions from "../pages/Transactions.jsx";
 
 //Récupère l'état d'authentification du Redux store à l'aide du hook useSelector.
 
@@ -26,6 +27,7 @@ const App = () => {
 						{token && (
 							<>
 								<Route path="/profile" element={<Profile />} />
+								<Route path="/account/:id" element={<Transactions />} />
 							</>
 						)}
 					</Route>

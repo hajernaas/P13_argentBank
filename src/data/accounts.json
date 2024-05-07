@@ -1,0 +1,176 @@
+[
+	{
+		"id": 1,
+		"name": "checking (x8349)",
+		"balance": "$2,082.79",
+		"type": "available",
+		"transactions": [
+			{
+				"id": 1,
+				"date": "June 20th 2020",
+				"description": "Golden sun Bakery",
+				"amount": "5",
+				"balance": "2154.54",
+				"type": "Electronic",
+				"category": "Food",
+				"notes": "Test"
+			},
+			{
+				"id": 2,
+				"date": "June 20th 2020",
+				"description": "Golden sun Bakery",
+				"amount": "10",
+				"balance": "2006.19",
+				"type": "Electronic",
+				"category": "Food",
+				"notes": ""
+			},
+			{
+				"id": 3,
+				"date": "June 20th 2020",
+				"description": "Golden sun Bakery",
+				"amount": "20",
+				"balance": "2382.43",
+				"type": "Electronic",
+				"category": "Food",
+				"notes": ""
+			},
+			{
+				"id": 4,
+				"date": "June 20th 2020",
+				"description": "Golden sun Bakery",
+				"amount": "30",
+				"balance": "2176.40",
+				"type": "Electronic",
+				"category": "Food",
+				"notes": ""
+			},
+			{
+				"id": 5,
+				"date": "June 20th 2020",
+				"description": "Golden sun Bakery",
+				"amount": "40",
+				"balance": "21862.56",
+				"type": "Electronic",
+				"category": "Food",
+				"notes": ""
+			}
+		]
+	},
+	{
+		"id": 2,
+		"name": "savings (x6712)",
+		"balance": "$10,928.42 ",
+		"type": "available",
+		"transactions": [
+			{
+				"id": 1,
+				"date": "June 20th 2020",
+				"description": "Golden sun Bakery",
+				"amount": "5",
+				"balance": "2082.79",
+				"type": "Electronic",
+				"category": "Food",
+				"notes": "Test"
+			},
+			{
+				"id": 2,
+				"date": "June 20th 2020",
+				"description": "Golden sun Bakery",
+				"amount": "10",
+				"balance": "2017.19",
+				"type": "Electronic",
+				"category": "Food",
+				"notes": ""
+			},
+			{
+				"id": 3,
+				"date": "June 20th 2020",
+				"description": "Golden sun Bakery",
+				"amount": "20",
+				"balance": "2132.50",
+				"type": "Electronic",
+				"category": "Food",
+				"notes": ""
+			},
+			{
+				"id": 4,
+				"date": "June 20th 2020",
+				"description": "Golden sun Bakery",
+				"amount": "30",
+				"balance": "2162.49",
+				"type": "Electronic",
+				"category": "Food",
+				"notes": ""
+			},
+			{
+				"id": 5,
+				"date": "June 20th 2020",
+				"description": "Golden sun Bakery",
+				"amount": "40",
+				"balance": "2004.56",
+				"type": "Electronic",
+				"category": "Food",
+				"notes": ""
+			}
+		]
+	},
+	{
+		"id": 3,
+		"name": "credit card (x8349)",
+		"balance": "$184.30",
+		"type": "current",
+		"transactions": [
+			{
+				"id": 1,
+				"date": "June 20th 2020",
+				"description": "Golden sun Bakery",
+				"amount": "5",
+				"balance": "2182.79",
+				"type": "Electronic",
+				"category": "Food",
+				"notes": "Test"
+			},
+			{
+				"id": 2,
+				"date": "June 20th 2020",
+				"description": "Golden sun Bakery",
+				"amount": "10",
+				"balance": "2100.43",
+				"type": "Electronic",
+				"category": "Food",
+				"notes": ""
+			},
+			{
+				"id": 3,
+				"date": "June 20th 2020",
+				"description": "Golden sun Bakery",
+				"amount": "20",
+				"balance": "2022.19",
+				"type": "Electronic",
+				"category": "Food",
+				"notes": ""
+			},
+			{
+				"id": 4,
+				"date": "June 20th 2020",
+				"description": "Golden sun Bakery",
+				"amount": "30",
+				"balance": "2482.79",
+				"type": "Electronic",
+				"category": "Food",
+				"notes": ""
+			},
+			{
+				"id": 5,
+				"date": "June 20th 2020",
+				"description": "Golden sun Bakery",
+				"amount": "40",
+				"balance": "2680.48",
+				"type": "Electronic",
+				"category": "Food",
+				"notes": ""
+			}
+		]
+	}
+]
