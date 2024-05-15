@@ -9,9 +9,7 @@ const UserInfo = () => {
 	const firstNameUser = useSelector(getFirstName);
 	const lastNameUser = useSelector(getLastName);
 	const [firstName, setFirstName] = useState("");
-	console.log("fist", firstName);
 	const [lastName, setLastName] = useState("");
-	console.log("last", lastName);
 	const [editUser, setEditUser] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
 
@@ -24,16 +22,9 @@ const UserInfo = () => {
 	const handleCancel = () => {
 		// Réinitialiser les champs et revenir à la vue normale
 		setEditUser(false);
-		//setFirstName(firstNameUser);
-		//setLastName(lastNameUser);
 	};
 
 	const handleSubmit = async (e) => {
-		//if (firstName !== firstNameUser || lastName !== lastNameUser) {
-		//if (firstNameUser !== "" && lastNameUser !== "") {
-
-		console.log("firstName", firstName);
-		console.log("firstNameUser", firstNameUser);
 		e.preventDefault();
 
 		if (firstName.length < 2 || lastName.length < 2) {
@@ -53,9 +44,6 @@ const UserInfo = () => {
 			dispatch(updateUserThunk({ token: authToken, firstName, lastName }));
 			setEditUser(false); // Revenir à la vue normale après la mise à jour
 		}
-		/*	} else {
-			handleCancel();
-		}*/
 	};
 
 	const updateName = async () => {
@@ -77,13 +65,10 @@ const UserInfo = () => {
 					</button>
 				) : (
 					<form className="edit-inputs-buttons" onSubmit={handleSubmit}>
-						{/* <div className="header"> */}
-						{/* <h1>Welcome back</h1> */}
 						<div className="edit-form">
 							<input
 								className="edit-input"
 								type="text"
-								//value={firstName}
 								onChange={(e) => setFirstName(e.target.value)}
 								placeholder={firstNameUser}
 								required
@@ -91,7 +76,6 @@ const UserInfo = () => {
 							<input
 								className="edit-input"
 								type="text"
-								//value={lastName}
 								onChange={(e) => setLastName(e.target.value)}
 								placeholder={lastNameUser}
 								required
@@ -100,14 +84,12 @@ const UserInfo = () => {
 								<button className="cancel-button" type="reset" onClick={handleCancel}>
 									Cancel
 								</button>
-								{/* <button className="save-button" onClick={handleSave}> */}
 								<button className="save-button" type="submit">
 									Save
 								</button>
 							</div>
 						</div>
 						{errorMessage && <div className="error-message">{errorMessage}</div>}
-						{/* </div> */}
 					</form>
 				)}
 			</div>

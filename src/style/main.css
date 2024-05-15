@@ -41,6 +41,13 @@ body {
 	white-space: nowrap !important; /* 3 */
 }
 
+a {
+	text-decoration: none;
+	color: black;
+}
+a:hover {
+	cursor: pointer;
+}
 .main-nav {
 	display: flex;
 	justify-content: space-between;
@@ -411,6 +418,40 @@ body {
 	color: #ff0000;
 }
 
+.error {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.error-title {
+	font-size: 208px;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 20px;
+	margin-top: 70px;
+	color: #ff0000;
+}
+.error-text {
+	font-size: 36px;
+	text-align: center;
+	margin: 0 50px 50px;
+	color: white;
+}
+
+.error-link {
+	text-decoration: underline;
+	font-size: 18px;
+	font-weight: bold;
+	color: white;
+	padding: 10px 20px;
+}
+
+.error-link:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
 @media (max-width: 720px) {
 	.transaction {
 		width: 90%;
@@ -430,6 +471,7 @@ body {
 
 	.account-content-wrapper.cta {
 		flex: 0;
+		text-decoration: none;
 	}
 
 	.transaction-button {
@@ -455,5 +497,11 @@ body {
 		display: flex;
 		flex-direction: column;
 		gap: 5px;
+	}
+	.error-title {
+		font-size: 170px;
+	}
+	.error-text {
+		font-size: 30px;
 	}
 }

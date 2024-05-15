@@ -5,16 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout, IsAuth, getToken } from "../../slices/authSlice.js";
+import { logout, getToken } from "../../slices/authSlice.js";
 
 const Header = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const isAuthenticated = useSelector(IsAuth);
+	//const isAuthenticated = useSelector(IsAuth);
 	const token = useSelector(getToken);
-	console.log("isAuthenticatedHeader", isAuthenticated);
-	console.log("tokenHeader", token);
-
 	const [isLogged, setIsLogged] = useState(false);
 
 	useEffect(() => {
@@ -33,7 +30,6 @@ const Header = () => {
 	};
 
 	const userFirstName = useSelector((state) => state.auth.firstName);
-	console.log("userFirstName", userFirstName);
 
 	return (
 		<header>

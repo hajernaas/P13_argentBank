@@ -13,7 +13,6 @@ const Profile = () => {
 	useEffect(() => {
 		if (authToken) {
 			dispatch(fetchUserThunk(authToken));
-			console.log("uuuuuuuuuuuu");
 		}
 	}, [authToken, dispatch]);
 

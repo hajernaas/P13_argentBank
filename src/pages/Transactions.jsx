@@ -7,16 +7,15 @@ import { useParams, Navigate } from "react-router-dom";
 
 const Transactions = () => {
 	const dispatch = useDispatch();
+	//const navigate = useNavigate();
 	const authToken = useSelector(getToken);
-
 	const { id } = useParams();
 	const accounts = data.find((item) => Number(item.id) === Number(id));
 
-	console.log("accounts", accounts);
 	useEffect(() => {
 		if (authToken) {
 			dispatch(fetchUserThunk(authToken));
-			console.log("uuuuuuuuuuuu");
+			//navigate(window.location.pathname);
 		}
 	}, [authToken, dispatch]);
 

@@ -1,8 +1,23 @@
 import React from "react";
+//import { Link, useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import data from "../../data/accounts.json";
+/*import { getToken } from "../../slices/authSlice";
+import { useSelector } from "react-redux";*/
 
 const Account = () => {
+	/*const navigate = useNavigate();
+	const authToken = useSelector(getToken);
+	const { id } = useParams();
+	console.log("id url account", id);
+
+	useEffect(() => {
+		if (authToken) {
+			navigate(`/account/${id}`);
+			navigate(window.location.pathname);
+		}
+	}, [authToken, navigate]);*/
+
 	return (
 		<>
 			<h2 className="sr-only">Accounts</h2>

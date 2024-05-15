@@ -5,13 +5,13 @@ import { faAngleDown, faPen } from "@fortawesome/free-solid-svg-icons";
 
 const TransactionDetails = ({ trans }) => {
 	const [isOpen, setIsOpen] = useState(false);
-	const [isEditCat, setIsEditCat] = useState(false);
+	const [isEditCategory, setIsEditCategory] = useState(false);
 	const [category, setCategory] = useState(trans.category);
 	const [isEditNotes, setIsEditNotes] = useState(false);
 	const [notes, setNotes] = useState(trans.notes);
 
 	const handleBlurCategory = () => {
-		setIsEditCat(!isEditCat);
+		setIsEditCategory(!isEditCategory);
 	};
 
 	const handleBlurNotes = () => {
@@ -35,13 +35,13 @@ const TransactionDetails = ({ trans }) => {
 				<div className="transaction-infos">
 					<p>Transaction Type: {trans.type}</p>
 
-					{!isEditCat ? (
+					{!isEditCategory ? (
 						<p>
 							Category: {category}
 							<FontAwesomeIcon
 								icon={faPen}
 								className="pen-icon"
-								onClick={() => setIsEditCat(!isEditCat)}
+								onClick={() => setIsEditCategory(!isEditCategory)}
 							/>
 						</p>
 					) : (
@@ -54,7 +54,7 @@ const TransactionDetails = ({ trans }) => {
 								onChange={(e) => setCategory(e.target.value)}
 								onKeyDown={(e) => {
 									if (e.key === "Enter") {
-										setIsEditCat(!isEditCat);
+										setIsEditCategory(!isEditCategory);
 									}
 								}}
 								onBlur={handleBlurCategory}

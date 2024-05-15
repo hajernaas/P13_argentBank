@@ -1,13 +1,9 @@
 import axios from "axios";
-//import { useDispatch } from "react-redux";
-//import { setPasswordError, setUserError } from "../slices/authSlice";
-import { setError } from "../slices/authSlice";
 
 const API_URL = "http://localhost:3001/api/v1";
 
 //Call API pour authentifer l'utilisateur
 export const loginUser = async (email, password) => {
-	//const dispatch = useDispatch();
 	try {
 		const response = await axios.post(
 			`${API_URL}/user/login`,
@@ -23,37 +19,37 @@ export const loginUser = async (email, password) => {
 				},
 			}
 		);
-		const { token } = response.data.body;
-		console.log("loginUser", response.data);
-		console.log("token", token);
-		console.log("Login successful!", response.data);
-		return response.data;
+
+		if (response.status === 200) {
+			console.log("Login successful!");
+			console.log("Response Data:", response.data);
+			return response.data;
+		} else {
+			throw new Error("Unexpected status code: " + response.status);
+		}
 	} catch (error) {
-		//throw error;
-		console.log("err", error.message);
-		/*if (error.response) {
-			setError(error.response.data.message);
-		} else {
-			setError("Une erreur s'est produite. Veuillez réessayer.");
-		}*/
-
-		/*if (error.response && error.response.status === 404) {
-			throw new Error(`Login failed: user not found. Status code: ${error.response.status}`);
-		} else {
-			throw new Error("Login failed: unknown error occurred.");
-		}*/
-		//throw new Error(`Login failed: unknown error occurred ${error.message}`);
-
-		if (error.response && error.response.status === 400) {
-			const errorMessage = error.response.data.message;
-			console.log("errorMessage", errorMessage);
-			if (errorMessage.includes("User not found")) {
-				throw new Error("Incorrect user name.");
-			} else if (errorMessage.includes("Password is invalid")) {
-				throw new Error("Incorrect password");
+		if (error.response) {
+			const statusCode = error.response.status;
+			switch (statusCode) {
+				case 400:
+					const errorMessage = error.response.data.message;
+					console.log("Error Message:", errorMessage);
+					if (errorMessage.includes("User not found")) {
+						throw new Error("Incorrect username.");
+					} else if (errorMessage.includes("Password is invalid")) {
+						throw new Error("Incorrect password");
+					} else {
+						throw new Error("Login failed: " + errorMessage);
+					}
+				case 404:
+					throw new Error("User login endpoint not found.");
+				case 500:
+					throw new Error("Internal server error.");
+				default:
+					throw new Error("Login failed: " + error.response.data.message);
 			}
 		} else {
-			throw new Error(`Login failed: unknown error occurred ${error.message}`);
+			throw new Error("Login failed: " + error.message);
 		}
 	}
 };
@@ -71,10 +67,30 @@ export const fetchUserProfile = async (token) => {
 				},
 			}
 		);
-
-		return response.data;
+		if (response.status === 200) {
+			console.log("User profile retrieved successfully!");
+			console.log("Profile Data:", response.data);
+			return response.data;
+		} else {
+			throw new Error("Unexpected status code: " + response.status);
+		}
 	} catch (error) {
-		throw new Error(`Failed to get user profile: ${error.message}`);
+		//throw new Error(`Failed to get user profile: ${error.message}`);
+		if (error.response) {
+			const statusCode = error.response.status;
+			switch (statusCode) {
+				case 400:
+					throw new Error("Bad request: " + error.response.data.message);
+				case 404:
+					throw new Error("User profile not found.");
+				case 500:
+					throw new Error("Internal server error.");
+				default:
+					throw new Error("Failed to get user profile: " + error.response.data.message);
+			}
+		} else {
+			throw new Error("Failed to get user profile: " + error.message);
+		}
 	}
 };
 
@@ -98,8 +114,28 @@ export const updateUserProfile = async (token, firstName, lastName) => {
 			}
 		);
 
-		return response.data;
+		if (response.status === 200) {
+			console.log("User profile updated successfully!");
+			console.log("Updated Profile Data:", response.data);
+			return response.data;
+		} else {
+			throw new Error("Unexpected status code: " + response.status);
+		}
 	} catch (error) {
-		throw new Error(`Error during PUT request: ${error.message}`);
+		if (error.response) {
+			const statusCode = error.response.status;
+			switch (statusCode) {
+				case 400:
+					throw new Error("Bad request: " + error.response.data.message);
+				case 404:
+					throw new Error("User profile not found.");
+				case 500:
+					throw new Error("Internal server error.");
+				default:
+					throw new Error("Error during PUT request: " + error.response.data.message);
+			}
+		} else {
+			throw new Error("Error during PUT request: " + error.message);
+		}
 	}
 };
