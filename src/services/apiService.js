@@ -41,11 +41,10 @@ export const loginUser = async (email, password) => {
 					} else {
 						throw new Error("Login failed: " + errorMessage);
 					}
-				case 404:
-					throw new Error("User login endpoint not found.");
 				case 500:
 					throw new Error("Internal server error.");
 				default:
+					console.log("ooooooot");
 					throw new Error("Login failed: " + error.response.data.message);
 			}
 		} else {
@@ -75,14 +74,11 @@ export const fetchUserProfile = async (token) => {
 			throw new Error("Unexpected status code: " + response.status);
 		}
 	} catch (error) {
-		//throw new Error(`Failed to get user profile: ${error.message}`);
 		if (error.response) {
 			const statusCode = error.response.status;
 			switch (statusCode) {
 				case 400:
 					throw new Error("Bad request: " + error.response.data.message);
-				case 404:
-					throw new Error("User profile not found.");
 				case 500:
 					throw new Error("Internal server error.");
 				default:
@@ -96,8 +92,6 @@ export const fetchUserProfile = async (token) => {
 
 //Call  API pour mettre à jour le profil utilisateur : firstName et lastName
 export const updateUserProfile = async (token, firstName, lastName) => {
-	//utiliser Axios pour envoyer une requête PUT à l'URL ${API_URL}/user/profile,
-	// avec les données de mise à jour du profil utilisateur (prénom et nom) et le token d'authentification.
 	try {
 		const response = await axios.put(
 			`${API_URL}/user/profile`,
@@ -127,8 +121,6 @@ export const updateUserProfile = async (token, firstName, lastName) => {
 			switch (statusCode) {
 				case 400:
 					throw new Error("Bad request: " + error.response.data.message);
-				case 404:
-					throw new Error("User profile not found.");
 				case 500:
 					throw new Error("Internal server error.");
 				default:

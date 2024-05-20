@@ -10,7 +10,7 @@ import {
 	toggleRememberMe,
 	isRememberMe,
 	clearErrors,
-	errorUser,
+	getError,
 } from "../../slices/authSlice.js";
 import { useNavigate } from "react-router-dom";
 
@@ -24,10 +24,9 @@ const Connection = () => {
 	const navigate = useNavigate();
 
 	//useSelector est utilisé pour extraire des données du store Redux.
-	//	const isConnected = useSelector(IsAuth);
 	const authToken = useSelector(getToken);
 	const rememberMe = useSelector(isRememberMe);
-	const error = useSelector(errorUser);
+	const error = useSelector(getError);
 
 	// useEffect est utilisé pour exécuter une action lorsque l'état de connexion (isConnected) change
 	useEffect(() => {
@@ -53,14 +52,14 @@ const Connection = () => {
 
 	const handleUsernameChange = (e) => {
 		setEmail(e.target.value);
-		if (error) {
+		if (e.target.value) {
 			dispatch(clearErrors());
 		}
 	};
 
 	const handlePasswordChange = (e) => {
 		setPassword(e.target.value);
-		if (error) {
+		if (e.target.value) {
 			dispatch(clearErrors());
 		}
 	};
@@ -83,11 +82,12 @@ const Connection = () => {
 							type="email"
 							id="username"
 							value={email}
-							// mettre à jour la variable email à l'aide de la fonction setEmail
+							// mettre à jour la variable email à l'aide de la fonction handleUsernameChange
 							//chaque fois que le contenu de l'élément <input> change
 							onChange={handleUsernameChange}
 							required
 						/>
+						{/* {emailError && <span style={{ color: "red" }}>{emailError}</span>} */}
 					</div>
 					<div className="input-wrapper">
 						<label htmlFor="password">Password</label>
@@ -98,6 +98,7 @@ const Connection = () => {
 							onChange={handlePasswordChange}
 							required
 						/>
+						{/* {passwordError && <span style={{ color: "red" }}>{passwordError}</span>} */}
 					</div>
 					<div className="input-remember">
 						<input

@@ -9,7 +9,6 @@ const Profile = () => {
 
 	//Utilisation de useEffect pour déclencher le fetchUserThunk dès que User est connecté aprés avoir vérifier que authToken existe.
 	//Lorsqu'un jeton d'authentification valide est présent, une action est dispatchée pour récupérer les données utilisateur
-	//en appelant fetchUserThunk.Cela déclenchera une requête vers votre API pour récupérer les données de l'utilisateur associé à ce jeton d'authentification.
 	useEffect(() => {
 		if (authToken) {
 			dispatch(fetchUserThunk(authToken));
