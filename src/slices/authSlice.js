@@ -1,5 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+//Représente une tranche de l'état de notre application pour l'authentification de l'utilisateur
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+//import { createAsyncThunk } from "@reduxjs/toolkit";
 import { loginUser, fetchUserProfile, updateUserProfile } from "../services/apiService.js";
 
 // Utiliser la méthode loginUser pour envoyer une requête POST avec les données email et password
@@ -12,7 +13,6 @@ export const loginThunk = createAsyncThunk(
 			return data;
 		} catch (error) {
 			//En cas d'erreur, elle rejette la thunk avec les données d'erreur de la réponse.(Propage l'erreur au store Redux (authSlice))
-
 			return rejectWithValue(error.message);
 		}
 	}
@@ -47,13 +47,13 @@ export const updateUserThunk = createAsyncThunk(
 );
 
 const initialState = {
-	//Définir l'état initial de la tranche d'authentification dans le Redux store.  Cet état inclut le statut d'authentification de l'utilisateur,
+	//Définir l'état initial de la tranche d'authentification dans le Redux store.  Cet état inclut
 	//les informations de l'utilisateur, la gestion des erreurs,le jeton d'authentification
-	token: localStorage.getItem("token") || sessionStorage.getItem("token") || null,
 	email: null,
 	firstName: null,
 	lastName: null,
 	error: null,
+	token: localStorage.getItem("token") || sessionStorage.getItem("token") || null,
 	// Récupèrer la valeur associée à "rememberMe" dans le stockage local et de déterminer si cette option a été activée
 	rememberMe: localStorage.getItem("rememberMe") === "true",
 };
@@ -127,10 +127,10 @@ export const authSlice = createSlice({
 //Exporter des actions créés par createSlice qui peuvent être utilisées dans les composants afin d'envoyer des informations .
 export const { logout, toggleRememberMe, clearErrors } = authSlice.actions;
 
-// Exporter authSlice  qui sera utilisé par le store
+// Exporter authSlice qui sera utilisé par le store
 export default authSlice.reducer;
 
-// Sélecteurs
+// Exporter des Sélecteurs pour l'extraction spécifique de partie de l'état d'authentification
 export const getToken = (state) => state.auth.token;
 export const isRememberMe = (state) => state.auth.rememberMe;
 export const getFirstName = (state) => state.auth.firstName;

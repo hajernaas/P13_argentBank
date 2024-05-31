@@ -4,6 +4,7 @@ import iconsecurity from "../../assets/icon-security.png";
 import iconchat from "../../assets/icon-chat.png";
 import FeatureItem from "./FeatureItem";
 
+//Le composant Feature crée une section de fonctionnalités mettant en avant trois aspects clés de la banque,
 const Feature = () => {
 	return (
 		<section className="features">

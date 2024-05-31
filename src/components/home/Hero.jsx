@@ -1,5 +1,7 @@
 import React from "react";
 
+//Le composant Hero crée une section de contenu promotionnel avec plusieurs messages clés
+//sur les avantages de la banque
 const Hero = () => {
 	return (
 		<div className="hero">

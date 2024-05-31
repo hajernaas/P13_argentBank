@@ -3,11 +3,15 @@ import { updateUserThunk, getToken, getLastName, getFirstName } from "../../slic
 import { useState } from "react";
 import Account from "./Account.jsx";
 
+//ce composant est responsable de l'affichage des infos utilisateur et de la
+// possibilité de les éditer
 const UserInfo = () => {
 	const dispatch = useDispatch();
+
 	const authToken = useSelector(getToken);
 	const firstNameUser = useSelector(getFirstName);
 	const lastNameUser = useSelector(getLastName);
+
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [editUser, setEditUser] = useState(false);
@@ -47,10 +51,11 @@ const UserInfo = () => {
 	};
 
 	const updateName = async () => {
-		setEditUser(true);
+		setEditUser(true); //pour passer en mode édition
 		setErrorMessage("");
 	};
 
+	//Structure JSX
 	return (
 		<main className="main bg-dark">
 			<div className="header">

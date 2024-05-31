@@ -1,5 +1,5 @@
+//ce code utilise axios pour effectuer des requêtes HTTP
 import axios from "axios";
-
 const API_URL = "http://localhost:3001/api/v1";
 
 //Call API pour authentifer l'utilisateur
@@ -33,7 +33,6 @@ export const loginUser = async (email, password) => {
 			switch (statusCode) {
 				case 400:
 					const errorMessage = error.response.data.message;
-					console.log("Error Message:", errorMessage);
 					if (errorMessage.includes("User not found")) {
 						throw new Error("Incorrect username.");
 					} else if (errorMessage.includes("Password is invalid")) {
@@ -44,7 +43,6 @@ export const loginUser = async (email, password) => {
 				case 500:
 					throw new Error("Internal server error.");
 				default:
-					console.log("ooooooot");
 					throw new Error("Login failed: " + error.response.data.message);
 			}
 		} else {

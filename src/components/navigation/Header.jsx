@@ -7,14 +7,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout, getToken, getFirstName } from "../../slices/authSlice.js";
 
+//Le composant Header gère l'affichage de la barre de navigation de l'application,
+//y compris les liens de connexion et de déconnexion en fonction de l'état de connexion de l'utilisateur.
 const Header = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	//useSelector pour accéder à l'état global (token et userFirstName).
 	const token = useSelector(getToken);
 	const userFirstName = useSelector(getFirstName);
 	const firsttname = localStorage.getItem("firstname");
+	//useState pour gérer l'état local isLogged indiquant si l'utilisateur est connecté.
 	const [isLogged, setIsLogged] = useState(false);
 
+	//pour mettre à jour isLogged lorsque le token change.
 	useEffect(() => {
 		if (token !== null) {
 			setIsLogged(true);
@@ -23,6 +28,7 @@ const Header = () => {
 		}
 	}, [navigate, token]);
 
+	//Déconnecte l'utilisateur en dispatchant l'action logout et redirige vers la page d'accuei
 	const handleLogout = (e) => {
 		e.preventDefault();
 		dispatch(logout());
@@ -30,6 +36,7 @@ const Header = () => {
 		navigate("/");
 	};
 
+	//Structure JSX
 	return (
 		<header>
 			<nav className="main-nav">

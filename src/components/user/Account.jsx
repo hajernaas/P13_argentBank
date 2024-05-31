@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import data from "../../data/accounts.json";
 
+//Ce composant affiche une liste de comptes bancaires en utilisant des données provenant d'un fichier JSON
 const Account = () => {
 	return (
 		<>

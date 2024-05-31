@@ -5,10 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserThunk, getToken } from "../slices/authSlice";
 import { useParams, Navigate } from "react-router-dom";
 
+//Pour afficher les détails des transactions d'un compte bancaire spécifique
 const Transactions = () => {
 	const dispatch = useDispatch();
 	const authToken = useSelector(getToken);
+	//Récupère l'ID du compte à partir des paramètres d'URL.
 	const { id } = useParams();
+	//Trouve le compte correspondant à l'ID dans les données JSON.
 	const accounts = data.find((item) => Number(item.id) === Number(id));
 
 	useEffect(() => {
@@ -17,9 +20,12 @@ const Transactions = () => {
 		}
 	}, [authToken, dispatch]);
 
+	//Redirige vers la page d'erreur si le compte n'est pas trouvé.
 	if (accounts === undefined) {
 		return <Navigate to="/error" />;
 	}
+
+	//Rendu JSX du composant, pour afficher les transactions de manière détaillée.
 	return (
 		<main className="main bg-dark">
 			<div className="transaction-page-header">

@@ -9,11 +9,8 @@ import { useSelector } from "react-redux";
 import { getToken } from "../slices/authSlice.js";
 import Transactions from "../pages/Transactions.jsx";
 
-//Récupère l'état d'authentification du Redux store à l'aide du hook useSelector.
-
 const App = () => {
 	const token = useSelector(getToken);
-
 	return (
 		<div className="App">
 			<Router>
@@ -21,7 +18,6 @@ const App = () => {
 					<Route path="/" element={<Layout />}>
 						<Route index element={<Home />} />
 						<Route path="/login" element={token ? <Navigate to={"/profile"} /> : <Login />} />
-
 						{token && (
 							<>
 								<Route path="/profile" element={<Profile />} />

@@ -1,5 +1,5 @@
-//Ce composant représente une page de connexion dans une application React, qui gère l'état
-//de la connexion à l'aide de Redux et redirige l'utilisateur vers la page de profil après une connexion réussie.
+//Ce composant représente une page de connexion, qui gère l'état de la connexion à l'aide de Redux
+//et redirige l'utilisateur vers la page de profil après une connexion réussie.
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
@@ -21,6 +21,7 @@ const Connection = () => {
 
 	// useDispatch est utilisé pour envoyer des actions Redux.
 	const dispatch = useDispatch();
+	//pour la navigation
 	const navigate = useNavigate();
 
 	//useSelector est utilisé pour extraire des données du store Redux.
@@ -28,7 +29,7 @@ const Connection = () => {
 	const rememberMe = useSelector(isRememberMe);
 	const error = useSelector(getError);
 
-	// useEffect est utilisé pour exécuter une action lorsque l'état de connexion (isConnected) change
+	// useEffect est utilisé pour exécuter une action lorsque (authToken) change
 	useEffect(() => {
 		if (authToken) {
 			navigate("/profile");
@@ -45,11 +46,13 @@ const Connection = () => {
 			console.error("Login failed:", error);
 		}
 	};
-
+	//la fonction handleToggleRememberMe permet d'interagir avec
+	//le store Redux pour changer l'état RememberMe selon l'action utilisateur,
 	const handleToggleRememberMe = () => {
 		dispatch(toggleRememberMe());
 	};
 
+	// sont appelées à chaque fois que le contenu des champs de formulaire change
 	const handleUsernameChange = (e) => {
 		setEmail(e.target.value);
 		if (e.target.value) {
@@ -71,6 +74,7 @@ const Connection = () => {
 				<FontAwesomeIcon
 					icon={faUserCircle}
 					className="fa fa-user-circle sign-in-icon"></FontAwesomeIcon>
+
 				<h1>Sign In</h1>
 
 				<form onSubmit={handleSubmit}>
@@ -82,12 +86,9 @@ const Connection = () => {
 							type="email"
 							id="username"
 							value={email}
-							// mettre à jour la variable email à l'aide de la fonction handleUsernameChange
-							//chaque fois que le contenu de l'élément <input> change
 							onChange={handleUsernameChange}
 							required
 						/>
-						{/* {emailError && <span style={{ color: "red" }}>{emailError}</span>} */}
 					</div>
 					<div className="input-wrapper">
 						<label htmlFor="password">Password</label>
@@ -98,7 +99,6 @@ const Connection = () => {
 							onChange={handlePasswordChange}
 							required
 						/>
-						{/* {passwordError && <span style={{ color: "red" }}>{passwordError}</span>} */}
 					</div>
 					<div className="input-remember">
 						<input
@@ -107,7 +107,6 @@ const Connection = () => {
 							checked={rememberMe}
 							onChange={handleToggleRememberMe}
 						/>
-
 						<label htmlFor="remember-me">Remember me</label>
 					</div>
 					<button type="submit" className="sign-in-button">
