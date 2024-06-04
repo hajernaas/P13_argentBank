@@ -260,7 +260,7 @@ paths:
       security:
         - Bearer: []
 
-    patch:
+    put:
       tags:
         - Transaction Module
       summary: Update informations of a specific transaction
@@ -285,7 +285,7 @@ paths:
           description: The unique identifier for the transaction to be updated.
         - in: body
           name: transactionUpdate
-          description: informations(category,notes) Payload
+          description: informations(category,notes)
           required: true
           schema:
             $ref: "#/definitions/TransactionUpdate"
@@ -314,7 +314,7 @@ paths:
           description: Internal Server Error.
 
   #permet de gérer les catégories associées à une transaction spécifique
-  /user/accounts/{accountId}/transactions/{transactionId}/categories:
+  /user/accounts/{accountId}/transactions/categories:
     get:
       security:
         - Bearer: []
@@ -334,11 +334,6 @@ paths:
           name: accountId
           required: true
           description: The unique identifier for the account whose transactions are to be retrieved.
-          type: integer
-        - in: path
-          name: transactionId
-          description: transaction Id of the account
-          required: true
           type: integer
       responses:
         "200":
@@ -360,13 +355,14 @@ paths:
         "500":
           description: Internal Server Error
 
+  /user/accounts/{accountId}/transactions/{transactionId}/categorie:
     delete:
       security:
         - Bearer: []
       tags:
         - Transaction Module
-      summary: Remove categories from a transaction
-      description: Removes categories associated with a specific transaction.
+      summary: Remove category from a transaction
+      description: Removes category associated with a specific transaction.
       produces:
         - application/json
       parameters:
